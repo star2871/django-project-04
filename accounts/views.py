@@ -13,7 +13,7 @@ def signup(request):
             form.save()
             user = form.save()  # ModelForm의 save 메서드의 리턴값은 해당 모델의 인스턴스다!
             auth_login(request, user)  # 로그인
-            return redirect("accounts:login")
+            return redirect("reviews:index")
     else:
         form = CustomUserCreationForm()
     context = {
@@ -31,7 +31,7 @@ def login(request):
             # login 함수는 request, user 객체를 인자로 받음
             # user 객체는 어디있어요? 바로 form에서 인증된 유저 정보를 받을 수 있음
             auth_login(request, form.get_user())
-            return redirect(request.GET.get("next") or "accounts:login")
+            return redirect(request.GET.get("next") or "reviews:index")
     else:
         form = AuthenticationForm()
     context = {
@@ -42,4 +42,4 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
-    return redirect("accounts:login")
+    return redirect("reviews:index")
