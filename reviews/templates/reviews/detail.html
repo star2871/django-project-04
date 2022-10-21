@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block body %}
+  <div>
+
+    <h1>{{ review.title }}</h1>
+    <h3>영화제목 :{{ review.movie_name }}</h3>
+    <h3>영화내용 :
+      {{ review.content }}</h3>
+    <h3>평점 :
+      {{ review.grade }}</h3>
+
+    <a href="{% url 'reviews:update' review.pk %}">수정</a>
+    <a href="#">삭제</a>
+  </div>
+  {% if request.user.is_authenticated %}
+    <span>{{ request.user }}</span>
+    <a href="#">댓글작성폼</a>
+    <a href="">댓글목록</a>
+  {% else %}
+  {% endif %}
+{% endblock %}
+{% bootstrap_javascript %}
