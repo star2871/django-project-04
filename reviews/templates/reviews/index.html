@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block body %}
+  <h1>게시판</h1>
+  <table class="table">
+    <thead>
+      <tr class="table-warning">
+        <th scope="col">아이디</th>
+        <th scope="col">리뷰제목</th>
+        <th scope="col">영화제목</th>
+        <th scope="col">글수정</th>
+        <th scope="col">글삭제</th>
+        <th scope="col">댓글</th>
+      </tr>
+    </thead>
+    {% for review in reviews %}
+      <tbody>
+        <tr class="table-warning">
+          <td>{{ review.user }}</td>
+          <td>
+            <a href="#">
+              {{ review.title }}
+            </a>
+          </td>
+          <td>{{ review.movie_name }}</td>
+          <td>
+            <a href="#">수정</a>
+          </td>
+          <td>
+            <a href="#">삭제</a>
+          </td>
+          <td>
+            {% if request.user.is_authenticated %}
+              <span>{{ request.user }}</span>
+              <a href="#">댓글작성폼</a>
+              <a href="">댓글목록</a>
+            {% else %}
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    {% endfor %}
+  </table>
+{% endblock %}
+{% bootstrap_javascript %}
