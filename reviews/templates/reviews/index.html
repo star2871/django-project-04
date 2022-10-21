@@ -13,9 +13,6 @@
         <th scope="col">아이디</th>
         <th scope="col">리뷰제목</th>
         <th scope="col">영화제목</th>
-        <th scope="col">글수정</th>
-        <th scope="col">글삭제</th>
-        <th scope="col">댓글</th>
       </tr>
     </thead>
     {% for review in reviews %}
@@ -23,25 +20,11 @@
         <tr class="table-warning">
           <td>{{ review.user }}</td>
           <td>
-            <a href="#">
+            <a href="{% url 'reviews:detail' review.pk %}">
               {{ review.title }}
             </a>
           </td>
           <td>{{ review.movie_name }}</td>
-          <td>
-            <a href="#">수정</a>
-          </td>
-          <td>
-            <a href="#">삭제</a>
-          </td>
-          <td>
-            {% if request.user.is_authenticated %}
-              <span>{{ request.user }}</span>
-              <a href="#">댓글작성폼</a>
-              <a href="">댓글목록</a>
-            {% else %}
-            {% endif %}
-          </td>
         </tr>
       </tbody>
     {% endfor %}
