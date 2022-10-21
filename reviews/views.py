@@ -31,6 +31,7 @@ def create(request):
     }
     return render(request, "reviews/new.html", context=context)
 
+
 def detail(request, pk):
     # 특정 글을 가져온다.
     review = Review.objects.get(pk=pk)
@@ -39,6 +40,7 @@ def detail(request, pk):
         "review": review,
     }
     return render(request, "reviews/detail.html", context)
+
 
 def update(request, pk):
     # GET : Form을 제공
@@ -59,3 +61,10 @@ def update(request, pk):
         "review_form": review_form,
     }
     return render(request, "reviews/update.html", context)
+
+
+def delete(request, pk):
+    # pk에 해당하는 글 삭제
+    review = Review.objects.get(id=pk)
+    review.delete()
+    return redirect("reviews:index")
