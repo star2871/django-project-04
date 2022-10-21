@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block body %}
+  <h1>글 쓰기</h1>
+
+  <form action="{% url 'reviews:create' %}" method='post'>
+    {% csrf_token %}
+    {% bootstrap_form review_form %}
+    {% bootstrap_button button_type="submit" content="작성"%}
+  </form>
+{% endblock %}
+</form>
+{% bootstrap_javascript %}
